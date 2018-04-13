@@ -33,12 +33,6 @@ div.ruler {height:20px; width:220px; background-color:#f0f6e4;border: 1px solid 
 div.ruler div.cursor {height:20px; width:30px; background-color:#3C6E31; color:white; text-align: right; padding-right: 5px; cursor: pointer}
 /*-------------------------------------
 zTree Style
-
-version:	3.5.19
-author:		Hunter.z
-email:		hunter.z@263.net
-website:	http://code.google.com/p/jquerytree/
-
 -------------------------------------*/
 
 .ztree * {padding:0; margin:0; font-size:12px;}
@@ -120,12 +114,3 @@ span.tmpzTreeMove_arrow {width:16px; height:16px; display: inline-block; padding
 
 ul.ztree.zTreeDragUL {margin:0; padding:0; position:absolute; width:auto; height:auto;overflow:hidden; background-color:#cfcfcf; border:1px #00B83F dotted; opacity:0.8; filter:alpha(opacity=80)}
 .zTreeMask {z-index:10000; background-color:#cfcfcf; opacity:0.0; filter:alpha(opacity=0); position:absolute}
-
-/* level style*/
-/*.ztree li span.button.level0 {
-	display:none;
-}
-.ztree li ul.level0 {
-	padding:0;
-	background:none;
-}*/

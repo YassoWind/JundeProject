@@ -1,4 +1,3 @@
-
 //初始json数据
 var jsondata ={
     OPMODEL: [],
@@ -172,7 +171,6 @@ function addzNodes(json) {
 }
 
 //删除分支 
-// var newznode22 = changeztree(jsondata)
 function removezNodes(json) {
     for (var i in jsondata) {
         if (json.name == i) {
@@ -187,19 +185,10 @@ function removezNodes(json) {
         }
     }
     console.log(jsondata)
-    // var newarr = [];
-    // for(var i=0;i<newznode22.length;i++){
-    //     if(newznode22[i]){
-    //         newarr.push(newznode22[i])
-    //     }
-    // }
     var newznode22 = changeztree(jsondata)
     $.fn.zTree.init($("#treeDemo"), setting, newznode22);
     return jsondata;
 }
-
-
-
 
 //新建工程
 function newEngineering() {
