@@ -399,6 +399,156 @@
     </div>
 
 
+
+    
+
+    <div class="overlay" hidden>
+
+        <nav class="navbar navbar-inverse" role="navigation" height="100px" hidden>
+            <div class="container-fluid">
+                <div>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a onClick="addPage('./addData/sensor.json')">巡检养护</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    健康监测 <b class="caret"></b>
+                </a>
+                            <ul class="dropdown-menu">
+                                <li><a onClick="addPage('./addData/JKJC1.json')">动态应变计</a></li>
+                                <li><a onClick="addPage('./addData/JKJC2.json')">模拟温湿度仪</a></li>
+                                <li><a onClick="">动态称重系统</a></li>
+                                <li><a onClick="">挠度传感器</a></li>
+                                <li><a onClick="">裂缝传感器</a></li>
+                                <li><a onClick="">振动传感器</a></li>
+                                <li><a onClick="">振弦应变计</a></li>
+                                <li><a onClick="">噪声仪</a></li>
+
+                            </ul>
+                        </li>
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                视频监控 <b class="caret"></b>
+                </a>
+                            <ul class="dropdown-menu">
+                                <li><a onClick="addLabel('./addData/video.json')">加载视频</a></li>
+                                <li><a onClick="var videoElement = document.getElementById('trailer');
+                                    videoElement.style.display = 'none';">关闭视频</a></li>
+
+                            </ul>
+                        </li>
+
+                        <li><a onClick="addPage('./addData/QJ.json')">桥梁亮化</a></li>
+                        <li><a onClick="collectFlyRoute()">testMove</a></li>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+
+
+    <div class="messageBox" hidden>
+
+
+
+        <div id="sensorTable">
+            <table class="table" height="100%" item-width="100%">
+                <thead>
+                    <tr>
+                        <th>序号</th>
+                        <th>传感器ID</th>
+                        <th>跳到</th>
+                    </tr>
+                </thead>
+                <tbody id='tablebody'>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div id="baseHeightSet" hidden>
+        <p><label>填挖方基准面高程：</label><input type="text" id="test" style="color: #050101;" value=200></p>
+        <button type="button" style="color: #050101;" onclick="setTWF()">确定</button>
+        <button type="button" style="color: #050101;" onclick='$("#baseHeightSet").hide();'>退出</button>
+    </div>
+
+
+    <div id="chartTable" hidden>
+
+
+    </div>
+
+    <div id="watchableSet" hidden>
+
+        <h4>可视域分析参数设置</h4>
+        <table class="table" item-width="100%" align="center">
+
+            <tbody>
+                <tr>
+                    <th> <label>范围</label></th>
+                    <th><input type="text" id="radius" style="color: #050101;" value=20></th>
+
+                </tr>
+                <tr>
+                    <th> <label>高度</label></th>
+                    <th><input type="text" id="height" style="color: #050101;" value=2></th>
+
+                </tr>
+                <tr>
+                    <th> <label>角度间隔</label></th>
+                    <th><input type="text" id="deltaAngle" style="color: #050101;" value=3></th>
+
+                </tr>
+                <tr>
+                    <th> <label>距离间隔</label></th>
+                    <th><input type="text" id="deltaLength" style="color: #050101;" value=2></th>
+
+                </tr>
+                <tr>
+                    <td> <input type="button" width=150px style="color: #050101;" onclick="setWAA()" value="确定"></input>
+                    </td>
+                    <td> <input type="button" width=150px style="color: #050101;" onclick='$("#watchableSet").hide();' value="退出"></input>
+                    </td>
+
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+    <div id="labelSet" hidden>
+
+        <h4 align="center">文字标注</h4>
+        <table class="table" item-width="100%" align="center">
+            <tbody>
+                <tr>
+                    <th> <label>经度</label></th>
+                    <th><input type="text" id="lng_label" style="color: #050101;" value=0></th>
+                </tr>
+                <tr>
+                    <th> <label>纬度</label></th>
+                    <th><input type="text" id="lat_label" style="color: #050101;" value=0></th>
+
+                </tr>
+                <tr>
+                    <th> <label>高度</label></th>
+                    <th><input type="text" id="height_label" style="color: #050101;" value=0></th>
+
+                </tr>
+                <tr>
+                    <th> <label>标注信息</label></th>
+                    <th><input type="text" id="text_label" style="color: #050101;" value=0></th>
+                </tr>
+            </tbody>
+        </table>
+        <div class="labelSet_bottom">
+            <button width=100px style="color: #050101;" onclick="getLabelPoint()">取点</button>
+            <button width=100px style="color: #050101;" onclick="addTextLabel()">确定</button>
+            <button width=100px style="color: #050101;" onclick='$("#labelSet").hide();'>退出</button>
+        </div>
+    </div>
+
+
     <script src="./src/loadModel.js"></script>
     <script src="./src/loadPlan.js"></script>
     <script src="./src/loadLabel.js"></script>
@@ -792,154 +942,6 @@
             lastEntityID.push(entity.id);
         }
     </script>
-
-
-    <div class="overlay" hidden>
-
-        <nav class="navbar navbar-inverse" role="navigation" height="100px" hidden>
-            <div class="container-fluid">
-                <div>
-
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a onClick="addPage('./addData/sensor.json')">巡检养护</a></li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    健康监测 <b class="caret"></b>
-                </a>
-                            <ul class="dropdown-menu">
-                                <li><a onClick="addPage('./addData/JKJC1.json')">动态应变计</a></li>
-                                <li><a onClick="addPage('./addData/JKJC2.json')">模拟温湿度仪</a></li>
-                                <li><a onClick="">动态称重系统</a></li>
-                                <li><a onClick="">挠度传感器</a></li>
-                                <li><a onClick="">裂缝传感器</a></li>
-                                <li><a onClick="">振动传感器</a></li>
-                                <li><a onClick="">振弦应变计</a></li>
-                                <li><a onClick="">噪声仪</a></li>
-
-                            </ul>
-                        </li>
-
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                视频监控 <b class="caret"></b>
-                </a>
-                            <ul class="dropdown-menu">
-                                <li><a onClick="addLabel('./addData/video.json')">加载视频</a></li>
-                                <li><a onClick="var videoElement = document.getElementById('trailer');
-                                    videoElement.style.display = 'none';">关闭视频</a></li>
-
-                            </ul>
-                        </li>
-
-                        <li><a onClick="addPage('./addData/QJ.json')">桥梁亮化</a></li>
-                        <li><a onClick="collectFlyRoute()">testMove</a></li>
-                </div>
-            </div>
-        </nav>
-    </div>
-
-
-
-    <div class="messageBox" hidden>
-
-
-
-        <div id="sensorTable">
-            <table class="table" height="100%" item-width="100%">
-                <thead>
-                    <tr>
-                        <th>序号</th>
-                        <th>传感器ID</th>
-                        <th>跳到</th>
-                    </tr>
-                </thead>
-                <tbody id='tablebody'>
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <div id="baseHeightSet" hidden>
-        <p><label>填挖方基准面高程：</label><input type="text" id="test" style="color: #050101;" value=200></p>
-        <button type="button" style="color: #050101;" onclick="setTWF()">确定</button>
-        <button type="button" style="color: #050101;" onclick='$("#baseHeightSet").hide();'>退出</button>
-    </div>
-
-
-    <div id="chartTable" hidden>
-
-
-    </div>
-
-    <div id="watchableSet" hidden>
-
-        <h4>可视域分析参数设置</h4>
-        <table class="table" item-width="100%" align="center">
-
-            <tbody>
-                <tr>
-                    <th> <label>范围</label></th>
-                    <th><input type="text" id="radius" style="color: #050101;" value=20></th>
-
-                </tr>
-                <tr>
-                    <th> <label>高度</label></th>
-                    <th><input type="text" id="height" style="color: #050101;" value=2></th>
-
-                </tr>
-                <tr>
-                    <th> <label>角度间隔</label></th>
-                    <th><input type="text" id="deltaAngle" style="color: #050101;" value=3></th>
-
-                </tr>
-                <tr>
-                    <th> <label>距离间隔</label></th>
-                    <th><input type="text" id="deltaLength" style="color: #050101;" value=2></th>
-
-                </tr>
-                <tr>
-                    <td> <input type="button" width=150px style="color: #050101;" onclick="setWAA()" value="确定"></input>
-                    </td>
-                    <td> <input type="button" width=150px style="color: #050101;" onclick='$("#watchableSet").hide();' value="退出"></input>
-                    </td>
-
-                </tr>
-            </tbody>
-        </table>
-
-    </div>
-
-    <div id="labelSet" hidden>
-
-        <h4 align="center">文字标注</h4>
-        <table class="table" item-width="100%" align="center">
-            <tbody>
-                <tr>
-                    <th> <label>经度</label></th>
-                    <th><input type="text" id="lng_label" style="color: #050101;" value=0></th>
-                </tr>
-                <tr>
-                    <th> <label>纬度</label></th>
-                    <th><input type="text" id="lat_label" style="color: #050101;" value=0></th>
-
-                </tr>
-                <tr>
-                    <th> <label>高度</label></th>
-                    <th><input type="text" id="height_label" style="color: #050101;" value=0></th>
-
-                </tr>
-                <tr>
-                    <th> <label>标注信息</label></th>
-                    <th><input type="text" id="text_label" style="color: #050101;" value=0></th>
-                </tr>
-            </tbody>
-        </table>
-        <div class="labelSet_bottom">
-            <button width=100px style="color: #050101;" onclick="getLabelPoint()">取点</button>
-            <button width=100px style="color: #050101;" onclick="addTextLabel()">确定</button>
-            <button width=100px style="color: #050101;" onclick='$("#labelSet").hide();'>退出</button>
-        </div>
-    </div>
-
     <script type="text/javascript" src="./zTree/jquery.ztree.core.js"></script>
     <script type="text/javascript" src="./zTree/jquery.ztree.excheck.js"></script>
     <script type="text/javascript" src="./zTree/zTree.js"></script>
