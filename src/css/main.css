@@ -1,0 +1,184 @@
+html,
+body,
+#cesiumContainer {
+    width: 100%;
+    position: fixed;
+    top: 0px;
+    bottom: 0px;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+#trailer {
+    /* position: absolute;
+    bottom: 75px;
+    right: 0;
+    width: 500px;
+    height: 300px;
+    z-index: 30; */
+    width: 800px;
+    height: 600px;
+    margin-left: -400px;
+    z-index: 30;
+    position: absolute;
+    /*设置为width的一半的负值*/
+    /*设置为height的一半的负值*/
+    top: 300px;
+    right: 0;
+}
+
+.div-out {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    /*设置距离网页左部和上部为50%，使得该div的左上角位于网页中间*/
+}
+
+.overlay {
+    width: 100%;
+    /* height: 200px; */
+    display: inline;
+    z-index: 100;
+    position: fixed;
+    top: 0px;
+    opacity: 1;
+}
+
+.messageBox {
+    width: 300px;
+    height: 100%;
+    z-index: 100;
+    top: 50px;
+    opacity: 1;
+    position: fixed;
+    left: 0px;
+}
+/* .messageBox:hover {
+    width: 300px;
+    height: 100%;
+    z-index: 100;
+    top: 0px;
+    opacity: 1;
+    position: fixed;
+    left: 0px;
+} */
+
+.cesium-widget-credits {
+    display: none!important;
+    visibility: hidden!important;
+}
+
+#sensorTable {
+    background-color: #333;
+    width: 300px;
+    height: "100%";
+    color: rgb(250, 250, 250);
+    overflow: auto;
+}
+
+#chartTable {
+    background-color: #333;
+    width: 600px;
+    height: 300px;
+    color: #FFFFFF;
+    overflow: auto;
+    position: absolute;
+    top: 50px;
+    bottom: 0px;
+    right: 20px;
+    z-index: 100;
+}
+
+#baseHeightSet {
+    width: 300px;
+    height: 90px;
+    background-color: #f1f1f1;
+    position: absolute;
+    top: 135px;
+    left: 13%;
+    z-index: 100;
+    border-radius: 5px;
+    padding-top: 10px;
+    border:5px solid #bfdfff;
+
+}
+#baseHeightSet input{
+    width: 145px;
+    border-radius: 2px;
+    outline: none;
+    border:1px solid #AFAFAF;
+    padding-left:5px;
+}
+#baseHeightSet p{
+    text-align: center;
+}
+#baseHeightSet button{
+    width: 80px;
+    height: 26px;
+    margin:10px 0 0 50px;
+}
+
+#watchableSet {
+    background-color: #333;
+    width: 300px;
+    height: 275px;
+    color: #FFFFFF;
+    overflow: auto;
+    position: absolute;
+    top: 140px;
+    bottom: 0px;
+    right: 20px;
+    z-index: 100;
+}
+
+#labelSet {
+    background-color: #f1f1f1;
+    width: 300px;
+    height: 275px;
+    overflow: auto;
+    position: absolute;
+    top: 245px;
+    left: 13%;
+    z-index: 100;
+    border-radius: 5px;
+    padding-top: 10px;
+    border:5px solid #bfdfff;
+}
+#labelSet h4{
+    font-size: 14px;
+    line-height: 26px;
+}
+
+#labelSet input {
+    width: 150px;
+    height: 26px;
+    border-radius: 2px;
+    outline: none;
+    border:1px solid #AFAFAF;
+    padding-left:5px;
+}
+
+.labelSet_bottom {
+    display: flex;
+    flex: 1;
+}
+
+.labelSet_bottom button {
+    width: 20%;
+    margin-left: 10%;
+}
+
+#sensorContent {
+    background-color: #333;
+    width: 300px;
+    position: absolute;
+    top: 302px;
+    bottom: 0px;
+    left: 0px;
+    z-index: 100;
+}
+
+#files{
+    display: none;
+}

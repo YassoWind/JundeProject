@@ -1,0 +1,29 @@
+<head>
+    <link href="http://vjs.zencdn.net/6.2.7/video-js.css" rel="stylesheet">
+
+    <!-- If you'd like to support IE8 -->
+    <script src="http://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script>
+</head>
+
+<body>
+    <!-- <video id="my-video" class="video-js" controls preload="auto" width="640" height="264" poster="MY_VIDEO_POSTER.jpg" data-setup="{}">
+          <source src="录制_2017_07_28_20_10_48_325.mp4" type='video/mp4'>
+          
+          <p class="vjs-no-js">
+            To view this video please enable JavaScript, and consider upgrading to a web browser that
+            <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+          </p>
+        </video>-->
+
+    <script src="http://vjs.zencdn.net/6.2.7/video.js"></script>
+
+    <h1>RTMP Sample Player Videojs</h1>
+    <p>Lei Xiaohua<br/>
+        <a href="http://blog.csdn.net/leixiaohua1020">http://blog.csdn.net/leixiaohua1020</a><br/> leixiaohua1020@126.com
+    </p>
+    <video id="example_video_1" class="video-js vjs-default-skin" controls preload="none" width="640" height="480" data-setup="{}">  
+        <source src="rtmp://202.117.80.19:1935/live/live2" type="rtmp/flv"/>  
+          
+        <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>  
+      </video>
+</body>
