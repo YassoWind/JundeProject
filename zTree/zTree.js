@@ -239,7 +239,3 @@ function openEngineering() {
 }
 
 newEngineering();
-
-
-
-var name = "zhangsan";
