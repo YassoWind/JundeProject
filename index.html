@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Use correct character set. -->
+    <meta charset="utf-8">
+    <!-- Tell IE to use the latest, best version. -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Make the application on mobile take up the full browser screen and disable user scaling. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <title>三维智慧工地信息管理系统</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel='Shortcut Icon' type='image/x-icon' href='./ui/img/windows.ico'>
+    <link href="./ui/css/animate.css" rel="stylesheet">
+    <link rel="stylesheet" href="./ui/component/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link href="./ui/css/default.css" rel="stylesheet">
+    <link href="./src/css/main.css" rel="stylesheet">
+    <link href="./Cesium/Widgets/widgets.css" rel="stylesheet">
+    <link rel="stylesheet" href="./zTree/zTreeStyle.css" type="text/css">
+    <link rel="shortcut icon" href="logo3.ico">
+</head>
+</head>
+
+<body>
+
+    <div class="leftMenu" id="modelInfo">
+        <p></p>
+    </div>
+
+    <!-- 右键菜单 -->
+    <div class="menu">
+        <p class="jump menu-content">跳转</p>
+        <p class="del menu-content">删除</p>
+        <p class="attr menu-content">属性</p>
+    </div>
+
+    <!-- 头部菜单 -->
+    <div class="header">
+        <div class="engineering content">
+            <ul>
+                <li onclick="newEngineering()">
+                    <img class="icon" src="./ui/img2/工程管理/工程管理.png" />
+                    <span>新建工程</span>
+                </li>
+
+                <li>
+                    <label onchange="openEngineering()">
+                        <img class="icon" src="./ui/img2/工程管理/打开工程.png" />
+                        <span>打开工程</span>
+                        <input type="file" id="files" name="file" />
+                    </label>
+                </li>
+
+                <li onclick="saveEngineering()">
+                    <img class="icon" src="./ui/img2/工程管理/保存工程.png" />
+                    <span>保存工程</span>
+                </li>
+                <!-- <li onclick=" Win10.exit();">
+                    <i class="black icon fa fa-power-off fa-fw"></i>
+                    <span>退出</span>
+                </li> -->
+            </ul>
+            <span class="header-title">工程管理</span>
+        </div>
+
+        <div class="map-loading content">
+            <ul>
+                <li onClick="changeBaseMap('tdt');Win10.menuClose()">
+                    <img class="icon" src="./ui/img2/地图加载/天地图.png" />
+                    <span>天地图</span>
+                </li>
+                <li onClick="changeBaseMap('bing');Win10.menuClose()">
+                    <img class="icon" src="./ui/img2/地图加载/必应地图.png" />
+                    <span>必应地图</span>
+                </li>
+                <li onClick="changeBaseMap('arcgis');Win10.menuClose()">
+                    <img class="icon" src="./ui/img2/地图加载/ArcGIS-Online.png" />
+                    <span>ArcGIS Online</span>
+                </li>
+                <li onClick="changeBaseMap('dark');Win10.menuClose()">
+                    <img class="icon" src="./ui/img2/地图加载/夜光地图.png" />
+                    <span>夜光地图</span>
+                </li>
+            </ul>
+            <span class="header-title">地图加载</span>
+        </div>
+
+        <div class="model-loading content">
+            <ul>
+                <li onclick="selectModel();Win10.menuClose()">
+                    <img class="icon" src="./ui/img2/三维数据加载/倾斜摄影模型.png" />
+                    <span>倾斜摄影模型</span>
+                </li>
+                <li onclick="selectModel();Win10.menuClose()">
+                    <img class="icon" src="./ui/img2/三维数据加载/BIM模型.png" />
+                    <span>BIM模型</span>
+                </li>
+            </ul>
+            <span class="header-title">模型加载</span>
+        </div>
+
+        <div class="mark-loading content">
+            <ul>
+                <li onclick="addKML();Win10.menuClose()">
+                    <img class="icon" src="./ui/img2/属性数据加载/道路线数据.png" />
+                    <span>道路线</span>
+                </li>
+                <li onclick="addPoint();Win10.menuClose()">
+                    <img class="icon" src="./ui/img2/属性数据加载/道路里程碑数据.png" />
+                    <span>道路里程碑</span>
+                </li>
+                <li onclick="addQM();Win10.menuClose()">
+                    <img class="icon" src="./ui/img2/属性数据加载/桥梁规划数据.png" />
+                    <span>桥梁规划</span>
+                </li>
+                <li onclick="addZCQ();Win10.menuClose()">
+                    <img class="icon" src="./ui/img2/属性数据加载/施工进度范围.png" />
+                    <span>征拆迁规划</span>
+                </li>
+            </ul>
+            <span class="header-title">注记加载</span>
+        </div>
+
+        <div class="threed content">
+            <ul>
+                <li onClick="collectFlyRoute();Win10.menuClose()">
+                    <img class="icon" src="./ui/img2/飞行漫游.png" />
+                    <span>路线漫游</span>
+                </li>
+                <li onclick="startTWF();Win10.menuClose()">
+                    <img class="icon" src="./ui/img2/三维空间分析/填挖方计算.png" />
+                    <span>填挖方量算</span>
+                </li>
+                <li onclick="createLengthClicked();Win10.menuClose()">
+                    <img class="icon" src="./ui/img2/量测计算/量测计算.png" />
+                    <span>距离量测</span>
+                </li>
+                <li onclick="createAreaClicked();Win10.menuClose()">
+                    <img class="icon" src="./ui/img2/量测计算/面积量测.png" />
+                    <span>面积量测</span>
+                </li>
+                <li onclick="pick();Win10.menuClose()">
+                    <img class="icon" src="./ui/img2/量测计算/坐标量测.png" />
+                    <span>坐标量测</span>
+                </li>
+            </ul>
+            <span class="header-title">三维分析</span>
+        </div>
+
+        <div class="map-mark content">
+            <ul>
+                <li onclick="getPointToLabel();Win10.menuClose()">
+                    <img class="icon" src="./ui/img2/量测计算/坐标量测.png" />
+                    <span>点标注</span>
+                </li>
+                <li onclick="collectPolyline();Win10.menuClose()">
+                    <img class="icon" src="./ui/img2/三维坐标采集/多段线采集.png" />
+                    <span>线标注</span>
+                </li>
+                <li onclick="collectPolygon();Win10.menuClose()">
+                    <img class="icon" src="./ui/img2/三维坐标采集/多边形采集.png" />
+                    <span>面标注</span>
+                </li>
+                <li onClick="$('#labelSet').show();">
+                    <img class="icon" src="./ui/img2/地图标注/文字标注.png" />
+                    <span>文字标注</span>
+                </li>
+            </ul>
+            <span class="header-title">地图标注</span>
+        </div>
+    </div>
+
+    <!-- 头部菜单2 -->
+    <div class="header2">
+
+        <span class="header-title2">
+                <img class="icon" src="./ui/img2/工程管理/工程管理.png" /><br/>
+                工程管理
+                <ul class="engineering_ul">
+                        <li onclick="newEngineering()">
+                            <img class="icon" src="./ui/img2/工程管理/工程管理.png" />
+                            <span>新建工程</span>
+        </li>
+
+        <li>
+            <label onchange="openEngineering()">
+                                <img class="icon" src="./ui/img2/工程管理/打开工程.png" />
+                                <span>打开工程</span>
+                                <input type="file" id="files" name="file" />
+                            </label>
+        </li>
+
+        <li onclick="saveEngineering()">
+            <img class="icon" src="./ui/img2/工程管理/保存工程.png" />
+            <span>保存工程</span>
+        </li>
+        </ul>
+        </span>
+
+        <span class="header-title2">
+                    <img class="icon" src="./ui/img2/地图加载/天地图.png" /><br/>
+                地图加载
+                <ul class="map_ul">
+                        <li onClick="changeBaseMap('tdt');Win10.menuClose()">
+                            <img class="icon" src="./ui/img2/地图加载/天地图.png" />
+                            <span>天地图</span>
+        </li>
+        <li onClick="changeBaseMap('bing');Win10.menuClose()">
+            <img class="icon" src="./ui/img2/地图加载/必应地图.png" />
+            <span>必应地图</span>
+        </li>
+        <li onClick="changeBaseMap('arcgis');Win10.menuClose()">
+            <img class="icon" src="./ui/img2/地图加载/ArcGIS-Online.png" />
+            <span>ArcGIS Online</span>
+        </li>
+        <li onClick="changeBaseMap('dark');Win10.menuClose()">
+            <img class="icon" src="./ui/img2/地图加载/夜光地图.png" />
+            <span>夜光地图</span>
+        </li>
+        </ul>
+        </span>
+
+
+        <span class="header-title2">
+                    <img class="icon" src="./ui/img2/三维数据加载/倾斜摄影模型.png" /><br/>
+                模型加载
+                <ul class="model_ul">
+                        <li onclick="selectModel();Win10.menuClose()">
+                            <img class="icon" src="./ui/img2/三维数据加载/倾斜摄影模型.png" />
+                            <span>倾斜摄影模型</span>
+        </li>
+        <li onclick="selectModel();Win10.menuClose()">
+            <img class="icon" src="./ui/img2/三维数据加载/BIM模型.png" />
+            <span>BIM模型</span>
+        </li>
+        </ul>
+        </span>
+
+
+        <span class="header-title2">
+                    <img class="icon" src="./ui/img2/属性数据加载/道路线数据.png" /><br/>
+                注记加载 <ul class="mark_ul">
+                        <li onclick="addKML();Win10.menuClose()">
+                            <img class="icon" src="./ui/img2/属性数据加载/道路线数据.png" />
+                            <span>道路线</span>
+        </li>
+        <li onclick="addPoint();Win10.menuClose()">
+            <img class="icon" src="./ui/img2/属性数据加载/道路里程碑数据.png" />
+            <span>道路里程碑</span>
+        </li>
+        <li onclick="addQM();Win10.menuClose()">
+            <img class="icon" src="./ui/img2/属性数据加载/桥梁规划数据.png" />
+            <span>桥梁规划</span>
+        </li>
+        <li onclick="addZCQ();Win10.menuClose()">
+            <img class="icon" src="./ui/img2/属性数据加载/施工进度范围.png" />
+            <span>征拆迁规划</span>
+        </li>
+        </ul>
+        </span>
+
+
+        <span class="header-title2">
+                    <img class="icon" src="./ui/img2/飞行漫游.png" /><br/>
+                三维分析<ul class="treeD_ul">
+                        <li onClick="collectFlyRoute();Win10.menuClose()">
+                            <img class="icon" src="./ui/img2/飞行漫游.png" />
+                            <span>路线漫游</span>
+        </li>
+        <li onclick="startTWF();Win10.menuClose()">
+            <img class="icon" src="./ui/img2/三维空间分析/填挖方计算.png" />
+            <span>填挖方量算</span>
+        </li>
+        <li onclick="createLengthClicked();Win10.menuClose()">
+            <img class="icon" src="./ui/img2/量测计算/量测计算.png" />
+            <span>距离量测</span>
+        </li>
+        <li onclick="createAreaClicked();Win10.menuClose()">
+            <img class="icon" src="./ui/img2/量测计算/面积量测.png" />
+            <span>面积量测</span>
+        </li>
+        <li onclick="pick();Win10.menuClose()">
+            <img class="icon" src="./ui/img2/量测计算/坐标量测.png" />
+            <span>坐标量测</span>
+        </li>
+        </ul>
+        </span>
+
+
+        <span class="header-title2">
+            <img class="icon" src="./ui/img2/量测计算/坐标量测.png" /><br/>地图标注 <ul class="mapMark_ul">
+                <li onclick="getPointToLabel();Win10.menuClose()">
+                                <img class="icon" src="./ui/img2/量测计算/坐标量测.png" />
+                                <span>点标注</span>
+        </li>
+        <li onclick="collectPolyline();Win10.menuClose()">
+            <img class="icon" src="./ui/img2/三维坐标采集/多段线采集.png" />
+            <span>线标注</span>
+        </li>
+        <li onclick="collectPolygon();Win10.menuClose()">
+            <img class="icon" src="./ui/img2/三维坐标采集/多边形采集.png" />
+            <span>面标注</span>
+        </li>
+        <li onClick="$('#labelSet').show();">
+            <img class="icon" src="./ui/img2/地图标注/文字标注.png" />
+            <span>文字标注</span>
+        </li>
+        </ul>
+        </span>
+    </div>
+
+
+    <div class="sidebar" id="sidebar_test">
+        <ul id="treeDemo" class="ztree"></ul>
+    </div>
+
+
+    <div class="div-out">
+        <video src="" id="trailer" autoplay="" style="display: none;" loop="" crossorigin="" controls=""> </video>
+    </div>
+    <div id="win10">
+
+        <!-- 地图 -->
+        <div class="desktop">
+            <div id="win10-shortcuts" class="shortcuts-hidden">
+
+            </div>
+            <div id="win10-desktop-scene">
+                <div id="cesiumContainer"></div>
+
+            </div>
+        </div>
+
+        <div id="win10-menu" class="hidden">
+            <div class="list win10-menu-hidden animated animated-slideOutLeft">
+
+                <div class="item">
+                    <img class="icon" src="./ui/img/飞行漫游.png" />
+                    <span>切换底图</span></div>
+                <div class="sub-item" onClick="changeBaseMap('tdt');Win10.menuClose()">
+                    <img class="icon" src="./ui/img/飞行漫游.png" />
+                    <span>天地图</span></div>
+                <div class="sub-item" onClick="changeBaseMap('bing');Win10.menuClose()">
+                    <img class="icon" src="./ui/img/飞行漫游.png" />
+                    <span>必应地图</span></div>
+                <div class="sub-item" onClick="changeBaseMap('arcgis');Win10.menuClose()">
+                    <img class="icon" src="./ui/img/飞行漫游.png" />
+                    <span>ArcGIS Online</span></div>
+                <div class="sub-item" onClick="changeBaseMap('dark');Win10.menuClose()">
+                    <img class="icon" src="./ui/img/飞行漫游.png" />
+                    <span>夜光地图</span>
+                </div>
+
+                <div class="item" onClick="collectFlyRoute();Win10.menuClose()">
+                    <img class="icon" src="./ui/img/飞行漫游.png" />
+                    <span>路线漫游</span></div>
+                <div class="item" onclick="selectModel();Win10.menuClose()"><img class="icon" src="./ui/img/三维数据加载/倾斜摄影模型.png" />
+                    <span>倾斜摄影模型</span></div>
+                <div class="item" onclick="selectModel();Win10.menuClose()">
+                    <img class="icon" src="./ui/img/三维数据加载/BIM模型.png" />
+                    <span>BIM模型</span>
+                </div>
+
+
+                <div class="item" onclick="addKML();Win10.menuClose()">
+                    <img class="icon" src="./ui/img/属性数据加载/道路线数据.png" />
+                    <span>道路线数据</span></div>
+                <div class="item" onclick="addPoint();Win10.menuClose()">
+                    <img class="icon" src="./ui/img/属性数据加载/道路里程碑数据.png" />
+                    <span>道路里程碑数据</span>
+                </div>
+                <div class="item" onclick="addQM();Win10.menuClose()">
+                    <img class="icon" src="./ui/img/属性数据加载/桥梁规划数据.png" />
+                    <span>桥梁规划数据</span></div>
+                <div class="item" onclick="addMovieTemp();Win10.menuClose()">
+                    <img class="icon" src="./ui/img/属性数据加载/实时监控数据.png" />
+                    <span>实时监控视频</span>
+                </div>
+                <div class="item" onclick="addZCQ();Win10.menuClose()">
+                    <img class="icon" src="./ui/img/属性数据加载/施工进度范围.png" />
+                    <span>征拆迁规划</span>
+                </div>
+
+
+                <div class="item" onclick="startTWF();Win10.menuClose()">
+                    <img class="icon" src="./ui/img/三维空间分析/填挖方计算.png" />
+                    <span>填挖方计算</span></div>
+
+
+                <div class="item"> <img class="icon" src="./ui/img/量测计算/坐标量测.png" />
+                    <span>量测计算</span></div>
+
+                <div class="sub-item" onclick="pick();Win10.menuClose()">
+                    <img class="icon" src="./ui/img/量测计算/坐标量测.png" />
+                    <span>坐标量测</span></div>
+                <div class="sub-item" onclick="createLengthClicked();Win10.menuClose()">
+                    <img class="icon" src="./ui/img/量测计算/量测计算.png" />
+                    <span>距离量测</span>
+                </div>
+                <div class="sub-item" onclick="createAreaClicked();Win10.menuClose()">
+                    <img class="icon" src="./ui/img/量测计算/面积量测.png" />
+                    <span>面积量测</span>
+                </div>
+
+
+
+                <div class="item">
+                    <img class="icon" src="./ui/img/三维坐标采集/三维坐标采集.png" />
+                    <span>地图标注</span></div>
+
+
+                <div class="sub-item" onclick="getPointToLabel();Win10.menuClose()">
+                    <img class="icon" src="./ui/img/量测计算/坐标量测.png" />
+                    <span>点标注</span>
+                </div>
+
+                <div class="sub-item" onclick="collectPolyline();Win10.menuClose()">
+                    <img class="icon" src="./ui/img/三维坐标采集/多段线采集.png" />
+                    <span>线标注</span>
+                </div>
+                <div class="sub-item" onclick="collectPolygon();Win10.menuClose()">
+                    <img class="icon" src="./ui/img/三维坐标采集/多边形采集.png" />
+                    <span>面标注</span></div>
+
+                <div class="sub-item" onClick="$('#labelSet').show();">
+                    <img class="icon" src="./ui/img/文字标注.png" />
+                    <span>文字标注</span></div>
+                <div class="sub-item" onClick="removeLabel();">
+                    <img class="icon" src="./ui/img/文字标注.png" />
+                    <span>删除标注</span></div>
+                <div class="sub-item" onClick="saveEntities();">
+                    <img class="icon" src="./ui/img/文字标注.png" />
+                    <span>保存标注</span></div>
+                <div class="sub-item" onClick="loadEntities();">
+                    <img class="icon" src="./ui/img/文字标注.png" />
+                    <span>加载标注</span></div>
+                <div class="item" onclick=" Win10.exit();"><i class="black icon fa fa-power-off fa-fw"></i>退出软件</div>
+
+            </div>
+            <div class="blocks">
+                <div class="menu_group">
+                    <div class="title">
+                        核心功能
+                    </div>
+
+                    <div loc="1,1" size="2,2" class="block" onclick="selectModel();Win10.menuClose()">
+                        <div class="content blue">
+                            <img style="width: 50px;height: 50px;margin: 5px auto;display: block" src="./ui/img/三维数据加载/倾斜摄影模型.png">
+                            <div class="win10-block-content-text" style="text-align:center;font-size: 12px">倾斜摄影模型</div>
+                        </div>
+                    </div>
+                    <div loc="1,3" size="2,2" class="block" onclick="createAreaClicked();Win10.menuClose()">
+                        <div class="content blue">
+                            <img style="width: 50px;height: 50px;margin: 5px auto;display: block" src="./ui/img/量测计算/面积量测.png">
+                            <div class="win10-block-content-text" style="text-align:center;font-size: 12px">面积测量</div>
+                        </div>
+                    </div>
+                    <div loc="3,1" size="2,2" class="block" onclick="startTWF();Win10.menuClose()">
+                        <div class="content blue">
+                            <img style="width: 50px;height: 50px;margin: 5px auto;display: block" src="./ui/img/三维空间分析/填挖方计算.png">
+                            <div class="win10-block-content-text" style="text-align:center;font-size: 12px">挖填方计算</div>
+                        </div>
+                    </div>
+                    <div loc="3,3" size="2,2" class="block" onclick="createLengthClicked();Win10.menuClose()">
+                        <div class="content blue">
+                            <img style="width: 50px;height: 50px;margin: 5px auto;display: block" src="./ui/img/量测计算/距离量测.png">
+                            <div class="win10-block-content-text" style="text-align:center;font-size: 12px">距离测量</div>
+                        </div>
+                    </div>
+
+                    <div loc="1,5" size="2,2" class="block" onclick="$('#labelSet').show();Win10.menuClose()">
+                        <div class="content blue">
+                            <img style="width: 50px;height: 50px;margin: 5px auto;display: block" src="./ui/img/文字标注.png">
+                            <div class="win10-block-content-text" style="text-align:center;font-size: 12px">文字标注</div>
+                        </div>
+                    </div>
+
+                    <div loc="3,5" size="2,2" class="block" onclick="collectFlyRoute();Win10.menuClose()">
+                        <div class="content blue">
+                            <img style="width: 50px;height: 50px;margin: 5px auto;display: block" src="./ui/img/飞行漫游.png">
+                            <div class="win10-block-content-text" style="text-align:center;font-size: 12px">飞行漫游</div>
+                        </div>
+                    </div>
+
+                    <div loc="1,7" size="2,2" class="block" onclick="viewer.dataSources.removeAll();Win10.menuClose()">
+                        <div class="content blue">
+                            <img style="width: 50px;height: 50px;margin: 5px auto;display: block" src="./ui/img/飞行漫游.png">
+                            <div class="win10-block-content-text" style="text-align:center;font-size: 12px">清空绘制</div>
+                        </div>
+                    </div>
+
+
+                    <!-- <div class="item" onClick="viewer.dataSources.removeAll()">
+                        <img class="icon" src="./ui/img/飞行漫游.png" />
+                        <span>清空绘制</span></div> -->
+                </div>
+
+            </div>
+            <div id="win10-menu-switcher"></div>
+        </div>
+        <div id="win10_command_center" class="hidden_right">
+            <div class="title">
+                <h4 style="float: left">消息中心 </h4>
+                <span id="win10_btn_command_center_clean_all">全部清除</span>
+            </div>
+            <div class="msgs"></div>
+        </div>
+        <div id="win10_task_bar">
+            <div id="win10_btn_group_left" class="btn_group">
+                <img id="win10_btn_win" src="./logo3.ico" width="40px" height="100%" alt="start" />
+                <img id="win10_btn_win2" src="./fdj.ico" width="36px" height="35px" alt="start" onclick="closeFunction()" />
+            </div>
+            <div id="win10_btn_group_right" class="btn_group">
+                <div class="btn" id="win10_btn_time">
+                    <!--0:00<br/>-->
+                    <!--1993/8/13-->
+                </div>
+
+            </div>
+        </div>
+        <div class="btn" id="win10_btn_command"><span id="win10-msg-nof" class="fa fa-comment-o"></span></div>
+        <div class="btn" id="win10_btn_show_desktop"></div>
+    </div>
+
+
+
+    <div id="baseHeightSet" hidden>
+        <p><label>填挖方基准面高程：</label><input type="text" id="test" style="color: #050101;" value=200></p>
+        <button type="button" style="color: #050101;" onclick="setTWF()">确定</button>
+        <button type="button" style="color: #050101;" onclick='$("#baseHeightSet").hide();'>退出</button>
+    </div>
+
+    <div id="chartTable" hidden>
+
+
+    </div>
+
+    <div id="watchableSet" hidden>
+
+        <h4>可视域分析参数设置</h4>
+        <table class="table" item-width="100%" align="center">
+
+            <tbody>
+                <tr>
+                    <th> <label>范围</label></th>
+                    <th><input type="text" id="radius" style="color: #050101;" value=20></th>
+
+                </tr>
+                <tr>
+                    <th> <label>高度</label></th>
+                    <th><input type="text" id="height" style="color: #050101;" value=2></th>
+
+                </tr>
+                <tr>
+                    <th> <label>角度间隔</label></th>
+                    <th><input type="text" id="deltaAngle" style="color: #050101;" value=3></th>
+
+                </tr>
+                <tr>
+                    <th> <label>距离间隔</label></th>
+                    <th><input type="text" id="deltaLength" style="color: #050101;" value=2></th>
+
+                </tr>
+                <tr>
+                    <td> <input type="button" width=150px style="color: #050101;" onclick="setWAA()" value="确定"></input>
+                    </td>
+                    <td> <input type="button" width=150px style="color: #050101;" onclick='$("#watchableSet").hide();' value="退出"></input>
+                    </td>
+
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+    <div id="labelSet" hidden>
+
+        <h4 align="center">文字标注</h4>
+        <table class="table" item-width="100%" align="center">
+            <tbody>
+                <tr>
+                    <th> <label>经度</label></th>
+                    <th><input type="text" id="lng_label" style="color: #050101;" value=0></th>
+                </tr>
+                <tr>
+                    <th> <label>纬度</label></th>
+                    <th><input type="text" id="lat_label" style="color: #050101;" value=0></th>
+
+                </tr>
+                <tr>
+                    <th> <label>高度</label></th>
+                    <th><input type="text" id="height_label" style="color: #050101;" value=0></th>
+
+                </tr>
+                <tr>
+                    <th> <label>标注信息</label></th>
+                    <th><input type="text" id="text_label" style="color: #050101;" value=0></th>
+                </tr>
+            </tbody>
+        </table>
+        <div class="labelSet_bottom">
+            <button width=100px style="color: #050101;" onclick="getLabelPoint()">取点</button>
+            <button width=100px style="color: #050101;" onclick="addTextLabel()">确定</button>
+            <button width=100px style="color: #050101;" onclick='$("#labelSet").hide();'>退出</button>
+        </div>
+    </div>
+
+
+    <script type="text/javascript" src="http://code.highcharts.com/highcharts.js"></script>
+    <script type="text/javascript" src="./Cesium/Cesium.js"></script>
+    <script type="text/javascript" src="./jquery.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="./ui/component/layer-v3.0.3/layer/layer.js"></script>
+    <script type="text/javascript" src="./ui/js/win10.js"></script>
+    <script type="text/javascript" src="./Cesium/Cesium.js"></script>
+    <script type="text/javascript" src="./zTree/plug-in.js"></script>
+    <script type="text/javascript" src="./src/loadModel.js"></script>
+    <script type="text/javascript" src="./src/loadPlan.js"></script>
+    <script type="text/javascript" src="./src/loadLabel.js"></script>
+    <script type="text/javascript" src="./src/loadPage.js"></script>
+    <script type="text/javascript" src="./src/fly.js"></script>
+    <script type="text/javascript" src="./src/control.js"></script>
+    <script type="text/javascript" src="./src/pickPosition.js"></script>
+    <script type="text/javascript" src="./src/playVideo.js"></script>
+    <script type="text/javascript" src="./src/routeTrack.js"></script>
+    <script type="text/javascript" src="./src/watchable.js"></script>
+    <script type="text/javascript" src="./src/globals.js"></script>
+    <script type="text/javascript" src="./src/measures/index.js"></script>
+    <script type="text/javascript" src="./src/measures/positionHandler.js"></script>
+    <script type="text/javascript" src="./src/measures/polyCreate.js"></script>
+    <script type="text/javascript" src="./src/measures/calculateLand.js"></script>
+    <script type="text/javascript" src="./src/require.js"></script>
+    <script type="text/javascript" src="./src/loadRoad.js"></script>
+    <script type="text/javascript" src="./src/position.js"></script>
+    <script type="text/javascript" src="./src/flyMove.js"></script>
+    <script type="text/javascript" src="./src/main.js"></script>
+    <script type="text/javascript" src="./zTree/jquery.ztree.core.js"></script>
+    <script type="text/javascript" src="./zTree/jquery.ztree.excheck.js"></script>
+    <script type="text/javascript" src="./zTree/zTree.js"></script>
+</body>
+
+</html>
