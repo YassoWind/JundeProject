@@ -43,6 +43,17 @@ function changeztree(json) {
         jsonlist.open = true;
         data.push(jsonlist)
     }
+    for(var i =0 ;i<data.length;i++){
+        if(data[i].name == "OPMODEL"){
+            data[i].name = "OP模型"
+        }else if(data[i].name == "BIMMODEL"){
+            data[i].name = "BIM模型"
+        }else if(data[i].name == "MARK"){
+            data[i].name = "标记"
+        }else if(data[i].name == "LABEL"){
+            data[i].name = "标签"
+        }
+    }
     return data;
 }
 
@@ -105,6 +116,7 @@ function onMouseDown(event, treeId, treeNode) {
         event.stopPropagation();
         // console.log(treeNode);
         menu.style.display = "none";
+        $(".heightMenu").eq(0).show();
     }
 
 }
@@ -139,6 +151,8 @@ function onCheck(event, treeId, treeNode) {
 //生成左侧树形结构
 function createTree(json) {
     var zNodes = changeztree(json)
+    console.log(zNodes)
+    
     $.fn.zTree.init($("#treeDemo"), setting, zNodes);
     count();
     clearFlag = $("#last").attr("checked");
@@ -293,3 +307,34 @@ $(".header-title2").eq(5).hover(function(event){
     $(".mapMark_ul").eq(0).hide();
 })
 
+
+//添加高度退出功能
+$(".HdropOut").eq(0).click(function(){
+    $(".heightMenu").eq(0).hide();
+})
+
+$(".Hsubmit").eq(0).click(function(){
+    var heightval = $(".heightval").eq(0).val();
+    if(!heightval){
+        $.Pop('高度不能为空！','alert')
+    }else{
+        $.Pop(heightval,'alert')
+    }
+})
+
+
+//输入模型中心位置退出功能
+$(".Mdropout").eq(0).click(function(){
+    $(".modelCenter").eq(0).hide();
+})
+//输入模型中心位置确定功能
+$(".Msubmit").eq(0).click(function(){
+    var Mlongitude = $(".Mlongitude").eq(0).val();
+    var Mlatitude = $(".Mlatitude").eq(0).val();
+    var Mheights = $(".Mheights").eq(0).val();
+    var Mroll = $(".Mroll").eq(0).val();
+    var Mpitch = $(".Mpitch").eq(0).val();
+    var Mheading = $(".Mheading").eq(0).val();
+    var scale = $(".scale").eq(0).val();
+    console.log(Mlongitude+","+Mlatitude+","+Mheights+","+Mroll+","+Mpitch+","+Mheading+","+scale)
+})

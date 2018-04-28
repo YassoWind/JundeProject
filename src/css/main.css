@@ -182,3 +182,65 @@ body,
 #files{
     display: none;
 }
+
+
+.heightMenu{
+    width: 280px;
+    height: 120px;
+    position: absolute;
+    top:135px;
+    left:285px;
+    z-index: 10000;
+    background-color: #f1f1f1;
+    border: 5px solid #bfdfff;
+    border-radius: 5px;
+    padding:0 10px;
+    display: none;
+}
+.heightMenu p{
+    text-align: center;
+    width: 100%;
+    line-height: 40px;
+    font-size: 16px;
+}
+.heightMenu .heightval{
+    border-radius: 3px;
+    border:1px solid #AFAFAF;
+    padding-left:5px;
+}
+.heightMenu button{
+    width: 70px;
+    margin-top: 15px;
+    margin-left: 16%;
+}
+
+.modelCenter{
+    width: 500px;
+    height: 220px;
+    position: absolute;
+    top:135px;
+    left:285px;
+    z-index: 10000;
+    background-color: #f1f1f1;
+    border: 5px solid #bfdfff;
+    border-radius: 5px;
+    padding:0 10px;
+    display: none;
+}
+.modelCenter .title{
+    width: 100%;
+    text-align: center;
+    line-height: 40px;
+    font-size: 16px;
+}
+.modelCenter p input{
+    width: 120px;
+    margin-right: 20px;
+}
+.modelCenter p button{
+    width: 120px;
+    margin-left:80px;
+}
+.modelCenter p .scale{
+    width: 260px;
+}

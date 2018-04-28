@@ -34,6 +34,15 @@
         <p class="attr menu-content">属性</p>
     </div>
 
+    <!-- 输入模型中心位置 -->
+    <div class="modelCenter">
+        <p class="title">输入模型中心位置</p>
+        <p>位置：<input type="text" class="Mlongitude" placeholder="请输入经度"/><input type="text" class="Mlatitude"  placeholder="请输入纬度"/><input type="text" class="Mheights"  placeholder="请输入高度"/></p><br/>
+        <p>姿态：<input type="text" class="Mroll" placeholder="请输入roll"/><input type="text" class="Mpitch" placeholder="请输入pitch"/><input type="text" class="Mheading" placeholder="请输入heading"/></p><br/>
+        <p>缩放：<input type="text" class="scale" placeholder="请输入缩放比例"/></p><br/>
+        <p><button class="Msubmit">确定</button><button class="Mdropout">退出</button></p>
+    </div>
+
     <!-- 头部菜单 -->
     <div class="header">
         <div class="engineering content">
@@ -91,7 +100,7 @@
                     <img class="icon" src="./ui/img2/三维数据加载/倾斜摄影模型.png" />
                     <span>倾斜摄影模型</span>
                 </li>
-                <li onclick="selectModel();Win10.menuClose()">
+                <li onclick="selectModel2();Win10.menuClose()">
                     <img class="icon" src="./ui/img2/三维数据加载/BIM模型.png" />
                     <span>BIM模型</span>
                 </li>
@@ -170,6 +179,13 @@
         </div>
     </div>
 
+    <!-- 高度调整菜单 -->
+    <div class="heightMenu">
+        <p>高度调整</p>
+        <label>高度：</label>
+        <input type="text" class="heightval"  style="color: #050101;">
+        <button type="button" class="Hsubmit">确定</button><button type="button" class="HdropOut">退出</button>
+    </div>
     <!-- 头部菜单2 -->
     <div class="header2">
 
@@ -177,17 +193,17 @@
                 <img class="icon" src="./ui/img2/工程管理/工程管理.png" /><br/>
                 工程管理
                 <ul class="engineering_ul">
-                        <li onclick="newEngineering()">
-                            <img class="icon" src="./ui/img2/工程管理/工程管理.png" />
-                            <span>新建工程</span>
+                    <li onclick="newEngineering()">
+                        <img class="icon" src="./ui/img2/工程管理/工程管理.png" />
+                        <span>新建工程</span>
         </li>
 
         <li>
             <label onchange="openEngineering()">
-                                <img class="icon" src="./ui/img2/工程管理/打开工程.png" />
-                                <span>打开工程</span>
-                                <input type="file" id="files" name="file" />
-                            </label>
+                <img class="icon" src="./ui/img2/工程管理/打开工程.png" />
+                <span>打开工程</span>
+                <input type="file" id="files" name="file" />
+            </label>
         </li>
 
         <li onclick="saveEngineering()">
@@ -229,7 +245,7 @@
                             <img class="icon" src="./ui/img2/三维数据加载/倾斜摄影模型.png" />
                             <span>倾斜摄影模型</span>
         </li>
-        <li onclick="selectModel();Win10.menuClose()">
+        <li onclick="selectModel2();Win10.menuClose()">
             <img class="icon" src="./ui/img2/三维数据加载/BIM模型.png" />
             <span>BIM模型</span>
         </li>
@@ -356,7 +372,7 @@
                     <span>路线漫游</span></div>
                 <div class="item" onclick="selectModel();Win10.menuClose()"><img class="icon" src="./ui/img/三维数据加载/倾斜摄影模型.png" />
                     <span>倾斜摄影模型</span></div>
-                <div class="item" onclick="selectModel();Win10.menuClose()">
+                <div class="item" onclick="selectModel2();Win10.menuClose()">
                     <img class="icon" src="./ui/img/三维数据加载/BIM模型.png" />
                     <span>BIM模型</span>
                 </div>

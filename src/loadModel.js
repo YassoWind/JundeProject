@@ -16,7 +16,7 @@ ipc.on('saved-file', function(event, path) {
     var fs = require('fs');
     fs.writeFile(path, newjsondata, (err) => {
         if (err) throw err;
-        $.Pop('保存成功', 'alert')
+        $.Pop(`保存成功<br/>所在位置：${path}`, 'alert')
     });
 
 })
@@ -37,6 +37,12 @@ ipc.on('multiModels-opened', function(event, filePath, deltaH, index) {
 })
 
 function selectModel() {
+    ipc.send('open-model-file-dialog');
+    return;
+}
+
+function selectModel2() {
+    $(".modelCenter").eq(0).show();
     ipc.send('open-model-file-dialog');
     return;
 }
